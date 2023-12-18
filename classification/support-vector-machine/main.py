@@ -15,4 +15,6 @@ dataset = pd.read_csv('Social_Network_Ads.csv')
 X = dataset.iloc[:, :-1].values  # Selecting all rows and all but the last column as features
 y = dataset.iloc[:, -1].values  # Selecting all rows and only the last column as the target variable
 
+# Splitting the dataset into Training and Test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=0)  # 25% data for testing
 

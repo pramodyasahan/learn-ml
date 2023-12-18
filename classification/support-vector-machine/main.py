@@ -27,3 +27,16 @@ X_test = sc.transform(X_test)
 classifier = SVC(kernel='rbf', random_state=0)
 classifier.fit(X_train, y_train)  # Training the model on the training set
 
+# Predicting the target variable for the test set
+y_pred = classifier.predict(X_test)
+
+# Printing the predicted and actual values side by side
+print(np.concatenate((y_pred.reshape(len(y_pred), 1), y_test.reshape(len(y_test), 1)), 1))
+
+# Creating a confusion matrix and calculating accuracy
+cm = confusion_matrix(y_test, y_pred)
+print(cm)  # Printing the confusion matrix
+accuracy = accuracy_score(y_test, y_pred)
+print(accuracy)  # Printing the accuracy of the model
+
+

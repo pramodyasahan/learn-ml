@@ -8,3 +8,11 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
 from sklearn.metrics import confusion_matrix, accuracy_score
 
+# Loading the dataset from a CSV file
+dataset = pd.read_csv('Social_Network_Ads.csv')
+
+# Extracting features (X) and target variable (y) from the dataset
+X = dataset.iloc[:, :-1].values  # Selecting all rows and all but the last column as features
+y = dataset.iloc[:, -1].values  # Selecting all rows and only the last column as the target variable
+
+

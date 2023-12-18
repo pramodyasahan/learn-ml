@@ -18,3 +18,8 @@ y = dataset.iloc[:, -1].values  # Selecting all rows and only the last column as
 # Splitting the dataset into Training and Test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=0)  # 25% data for testing
 
+# Feature Scaling
+sc = StandardScaler()
+X_train = sc.fit_transform(X_train)
+X_test = sc.transform(X_test)
+

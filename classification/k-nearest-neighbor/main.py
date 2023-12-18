@@ -23,7 +23,7 @@ sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
 
-# Creating a Logistic Regression model
+# Creating a K-NN model
 classifier = KNeighborsClassifier(n_neighbors=5, p=2, metric='minkowski')
 classifier.fit(X_train, y_train)  # Training the model on the training set
 
@@ -49,7 +49,7 @@ plt.xlim(X1.min(), X1.max())
 plt.ylim(X2.min(), X2.max())
 for i, j in enumerate(np.unique(y_set)):
     plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], c=ListedColormap(('red', 'green'))(i), label=j)
-plt.title('Logistic Regression (Training Set)')
+plt.title('K-NN (Training Set)')
 plt.xlabel('Age')
 plt.ylabel('Estimated Salary')
 plt.legend()
@@ -65,7 +65,7 @@ plt.xlim(X1.min(), X1.max())
 plt.ylim(X2.min(), X2.max())
 for i, j in enumerate(np.unique(y_set)):
     plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], c=ListedColormap(('red', 'green'))(i), label=j)
-plt.title('Logistic Regression (Testing Set)')
+plt.title('K-NN (Testing Set)')
 plt.xlabel('Age')
 plt.ylabel('Estimated Salary')
 plt.legend()

@@ -23,3 +23,7 @@ sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
 
+# Creating a Logistic Regression model
+classifier = KNeighborsClassifier(n_neighbors=5, p=2, metric='minkowski')
+classifier.fit(X_train, y_train)  # Training the model on the training set
+

@@ -24,7 +24,7 @@ X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
 
 # Creating a SVC model
-classifier = SVC(kernel='rbf', random_state=0)
+classifier = SVC(kernel='linear', random_state=0)
 classifier.fit(X_train, y_train)  # Training the model on the training set
 
 # Predicting the target variable for the test set

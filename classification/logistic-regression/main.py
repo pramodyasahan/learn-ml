@@ -1,3 +1,4 @@
+# Importing necessary libraries
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -7,28 +8,38 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix, accuracy_score
 
+# Loading the dataset from a CSV file
 dataset = pd.read_csv('Social_Network_Ads.csv')
-X = dataset.iloc[:, :-1].values
-y = dataset.iloc[:, -1].values
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=0)
+# Extracting features (X) and target variable (y) from the dataset
+X = dataset.iloc[:, :-1].values  # Selecting all rows and all but the last column as features
+y = dataset.iloc[:, -1].values  # Selecting all rows and only the last column as the target variable
 
+# Splitting the dataset into Training and Test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=0)  # 25% data for testing
+
+# Feature Scaling
 sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
 
+# Creating a Logistic Regression model
 classifier = LogisticRegression(random_state=0)
-classifier.fit(X_train, y_train)
+classifier.fit(X_train, y_train)  # Training the model on the training set
 
+# Predicting the target variable for the test set
 y_pred = classifier.predict(X_test)
+
+# Printing the predicted and actual values side by side
 print(np.concatenate((y_pred.reshape(len(y_pred), 1), y_test.reshape(len(y_test), 1)), 1))
 
+# Creating a confusion matrix and calculating accuracy
 cm = confusion_matrix(y_test, y_pred)
-print(cm)
-
+print(cm)  # Printing the confusion matrix
 accuracy = accuracy_score(y_test, y_pred)
-print(accuracy)
+print(accuracy)  # Printing the accuracy of the model
 
+# Visualizing the results on the Training set
 X_set, y_set = sc.inverse_transform(X_train), y_train
 X1, X2 = np.meshgrid(np.arange(start=X_set[:, 0].min() - 10, stop=X_set[:, 0].max() + 10, step=0.25),
                      np.arange(start=X_set[:, 1].min() - 1000, stop=X_set[:, 1].max() + 1000, step=0.25))
@@ -44,6 +55,7 @@ plt.ylabel('Estimated Salary')
 plt.legend()
 plt.show()
 
+# Visualizing the results on the Testing set
 X_set, y_set = sc.inverse_transform(X_test), y_test
 X1, X2 = np.meshgrid(np.arange(start=X_set[:, 0].min() - 10, stop=X_set[:, 0].max() + 10, step=0.25),
                      np.arange(start=X_set[:, 1].min() - 1000, stop=X_set[:, 1].max() + 1000, step=0.25))

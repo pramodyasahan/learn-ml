@@ -12,4 +12,9 @@ for i in range(1, 11):
     cluster.fit(X)
     wcss.append(cluster.inertia_)
 
+plt.plot(range(1, 11), wcss)
+plt.title('The Elbow Method')
+plt.xlabel('Number of Clusters')
+plt.ylabel('WCSS')
+plt.show()
 

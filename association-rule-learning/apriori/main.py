@@ -13,9 +13,6 @@ def inspect(results):
     return list(zip(lhs, rhs, supports, confidences, lifts))
 
 
-resultsinDataFrame = pd.DataFrame(inspect(results),
-                                  columns=['Left Hand Side', 'Right Hand Side', 'Support', 'Confidence', 'Lift'])
-
 dataset = pd.read_csv('Market_Basket_Optimisation.csv', header=None)
 transactions = []
 for raw in range(0, 7501):
@@ -26,3 +23,8 @@ rules = apriori(transactions=transactions, min_support=0.003, min_confidence=00.
 
 results = list(rules)
 print(results)
+
+resultsinDataFrame = pd.DataFrame(inspect(results),
+                                  columns=['Left Hand Side', 'Right Hand Side', 'Support', 'Confidence', 'Lift'])
+
+print(resultsinDataFrame.nlargest(n=10, columns='Lift'))

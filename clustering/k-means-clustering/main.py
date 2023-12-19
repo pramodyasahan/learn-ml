@@ -18,3 +18,6 @@ plt.xlabel('Number of Clusters')
 plt.ylabel('WCSS')
 plt.show()
 
+cluster = KMeans(n_clusters=5, init='k-means++', random_state=42)
+y_kmeans = cluster.fit_predict(X)
+

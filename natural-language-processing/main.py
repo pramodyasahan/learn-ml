@@ -7,6 +7,7 @@ from nltk.stem.porter import PorterStemmer
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score, confusion_matrix
+from sklearn.feature_extraction.text import CountVectorizer
 
 dataset = pd.read_csv('Restaurant_Reviews.tsv', delimiter='\t', quoting=3)
 
@@ -22,3 +23,7 @@ for i in range(0, len(dataset)):
     review = [ps.stem(word) for word in review if not word in set()]
     review = ' '.join(review)
     corpus.append(review)
+
+cv = CountVectorizer(max_features=1550)
+X = cv.fit_transform(corpus).toarray()
+y = dataset.iloc[:, -1].values

@@ -1,7 +1,7 @@
 import re
 import nltk
 import pandas as pd
-import matplotlib.pyplot as plt
+import numpy as np
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 from sklearn.model_selection import train_test_split
@@ -32,3 +32,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 classifier = GaussianNB()
 classifier.fit(X_train, y_train)
 y_pred = classifier.predict(X_test)
+
+print(np.concatenate((y_pred.reshape(len(y_pred), 1), y_test.reshape(len(y_test), 1)), axis=1))
+accuracy = accuracy_score(y_test, y_pred)
+confusion_matrix = confusion_matrix(y_test, y_pred)
+print(confusion_matrix, accuracy)

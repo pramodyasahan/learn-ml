@@ -2,10 +2,10 @@ import re
 import nltk
 import pandas as pd
 import numpy as np
+from sklearn.svm import SVC
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.feature_extraction.text import CountVectorizer
 
@@ -29,7 +29,7 @@ X = cv.fit_transform(corpus).toarray()
 y = dataset.iloc[:, -1].values
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
-classifier = GaussianNB()
+classifier = SVC(kernel='rbf')
 classifier.fit(X_train, y_train)
 y_pred = classifier.predict(X_test)
 

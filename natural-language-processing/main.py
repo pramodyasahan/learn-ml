@@ -27,3 +27,8 @@ for i in range(0, len(dataset)):
 cv = CountVectorizer(max_features=1550)
 X = cv.fit_transform(corpus).toarray()
 y = dataset.iloc[:, -1].values
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+classifier = GaussianNB()
+classifier.fit(X_train, y_train)
+y_pred = classifier.predict(X_test)
